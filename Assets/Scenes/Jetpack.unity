@@ -1452,7 +1452,9 @@ MonoBehaviour:
   - {fileID: 100000, guid: facb5e6069a4f5b4ba2d536132eb1ad6, type: 2}
   currentRooms:
   - {fileID: 560516750}
-  availableObjects: []
+  availableObjects:
+  - {fileID: 100000, guid: 0c54c6240b26a3e4da945d2e3931e943, type: 2}
+  - {fileID: 100000, guid: ef3445fc6efc1b64392b43429fa11997, type: 2}
   objects: []
   objectsMinDistance: 5
   objectsMaxDistance: 10

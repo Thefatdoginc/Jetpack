@@ -18,15 +18,13 @@ public class LaserScript : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-	
-	}
+
 
 	void FixedUpdate()
 	{
 		timeUntilNextToggle -= Time.fixedDeltaTime;
 
-		if (timeUntilNextToggle >= 0) {
+		if (timeUntilNextToggle <= 0) {
 
 			isLaserOn=!isLaserOn;
 
@@ -34,9 +32,8 @@ public class LaserScript : MonoBehaviour {
 
 			SpriteRenderer spriteRenderer=((SpriteRenderer)this.renderer);
 			if(isLaserOn)
-			{
-				spriteRenderer.sprite=laserOnSprite;
-			}
+			spriteRenderer.sprite=laserOnSprite;
+
 			else
 				spriteRenderer.sprite=laserOffSprite;
 
