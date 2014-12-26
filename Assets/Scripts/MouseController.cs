@@ -16,6 +16,9 @@ public class MouseController : MonoBehaviour {
 	public Texture2D coinIconTexture;
 
 
+	
+	public GUIStyle restartButtonStyle;
+
 	Animator animator;
 
 	// Use this for initialization
@@ -94,7 +97,7 @@ public class MouseController : MonoBehaviour {
 	void DisplayCoinsCount()
 	{
 		Rect coinIconRect = new Rect (10, 10, 32, 32);
-		GUI.DrawTexture (coinInRect, coinIconTexture);
+		GUI.DrawTexture (coinIconRect, coinIconTexture);
 
 		GUIStyle style = new GUIStyle ();
 		style.fontSize = 30;
@@ -102,6 +105,32 @@ public class MouseController : MonoBehaviour {
 		style.normal.textColor = Color.yellow;
 
 		Rect labelRect = new Rect (coinIconRect.xMax, coinIconRect.y, 60, 32);
+
 		GUI.Label (labelRect, coins.ToString (), style);
+	}
+
+	void OnGUI()
+	{
+		DisplayCoinsCount ();
+		DisplayRestartButton ();
+	}
+
+
+	void DisplayRestartButton()
+	{
+
+		
+
+
+		if (dead && grounded) 
+		{
+			Rect buttonRect=new Rect(Screen.width*0.35f,Screen.height*0.45f, Screen.width*0.30f,Screen.height*0.1f);
+
+			if(GUI.Button(buttonRect, "Restart"))
+		
+			{
+				Application.LoadLevel(Application.loadedLevel);
+			}
+		}
 	}
 }
