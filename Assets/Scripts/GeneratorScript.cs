@@ -20,8 +20,8 @@ public class GeneratorScript : MonoBehaviour {
 	public float objectsMinY= 1.4f;
 	public float objectsMaxY= 1.4f;
 
-	public float objectsMinRotation= 0.5f;
-	public float objectsMaxRotation= 0.5f;
+	public float objectsMinRotation= -45.0f;
+	public float objectsMaxRotation= 45.0f;
 
 
 
@@ -40,6 +40,8 @@ public class GeneratorScript : MonoBehaviour {
 	void FixedUpdate () {
 		
 		GenerateRoomIfRequred();
+		GenerateObjectsIfRequired ();
+
 	}
 
 
@@ -141,7 +143,7 @@ public class GeneratorScript : MonoBehaviour {
 	{
 		float playerX = transform.position.x;
 		float removeObjectsX = playerX - screenWidthInPoints;
-		float addObjects = playerX + screenWidthInPoints;
+		float addObjectX = playerX + screenWidthInPoints;
 		float farthestObjectX = 0;
 
 		List<GameObject> objectsToRemove = new List<GameObject> ();
@@ -159,6 +161,11 @@ public class GeneratorScript : MonoBehaviour {
 		foreach (var obj in objectsToRemove) {
 			objects.Remove(obj);
 			Destroy(obj);
+
+
 		}
+
+		if (farthestObjectX < addObjectX)
+						AddObject (farthestObjectX);
 	}
 }
