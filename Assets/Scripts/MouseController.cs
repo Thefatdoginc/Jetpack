@@ -19,6 +19,12 @@ public class MouseController : MonoBehaviour {
 	
 	public GUIStyle restartButtonStyle;
 
+	public AudioClip coinCollectSound;
+	public AudioSource jetpackAudio;
+	public AudioSource footstepsAudio;
+
+	public ParallaxScroll parallax;
+
 	Animator animator;
 
 	// Use this for initialization
@@ -51,6 +57,10 @@ public class MouseController : MonoBehaviour {
 
 		updateGroundStatus ();
 		AdjustJetpack (jetpackActive);
+
+		AdjustFootsepsAndJetpackSound (jetpackActive);
+
+		parallax.offset = transform.position.x;
 	}
 
 	void updateGroundStatus()
@@ -81,9 +91,15 @@ public class MouseController : MonoBehaviour {
 
 	void HitByLaser(Collider2D laserCollider)
 	{
+		if (!dead) 
+		{
+			laserCollider.gameObject.audio.Play();	
+		}
 
 		dead = true;
 		animator.SetBool ("dead", true);
+
+
 	}
 
 	void CollectCoin(Collider2D  coinCollider)
@@ -91,6 +107,7 @@ public class MouseController : MonoBehaviour {
 	{
 		coins++;
 		Destroy (coinCollider.gameObject);
+		AudioSource.PlayClipAtPoint (coinCollectSound, transform.position);
 	}
 
 
@@ -133,4 +150,13 @@ public class MouseController : MonoBehaviour {
 			}
 		}
 	}
+
+	void AdjustFootsepsAndJetpackSound(bool jetpackActive)
+	{
+		footstepsAudio.enabled = !dead && grounded;
+
+		jetpackAudio.enabled = !dead && !grounded;
+	jetpackAudio.volume = jetpackActive ? 1.0f : 0.5f;
+	}
+
 }
